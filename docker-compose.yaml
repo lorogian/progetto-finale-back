@@ -1,0 +1,24 @@
+version: "2.2"
+services:
+  www:
+    build: .
+    volumes:
+    - "./php:/var/www/html"
+    ports:
+    - 8080:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - 8081:80
+    environment:
+    - PMA_HOST=db
+    - PMA_PORT=3306
+    - PMA_ARBITARY=1
+  db:  
+    image: mysql:5.7
+    environment:
+    - MYSQL_ROOT_PASSWORD=segretissima
+    volumes:
+    - "./db:/var/lib/mysql"
+    ports:
+    - 3306:3306
